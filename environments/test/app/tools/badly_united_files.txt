@@ -1,2 +1,0 @@
-/application/app/Console/Commands/TestSetupCommand.php
-/application/app/Services/RabbitMQ/RabbitMQService.php

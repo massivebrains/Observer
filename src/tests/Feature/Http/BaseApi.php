@@ -8,6 +8,6 @@ class BaseApi extends TestCase
 {
     public function api()
     {
-        return $this->withHeader('Authorization', sprintf('Bearer %s', config('status-monitoring.auth-token')));
+        return $this->withHeader('Authorization', sprintf('Bearer %s', config('observer.auth-token')));
     }
 }

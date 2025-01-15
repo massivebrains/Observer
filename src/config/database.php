@@ -45,7 +45,7 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DB_URL'),
-            'host' => env('DB_HOST', 'status-monitoring-mysql'),
+            'host' => env('DB_HOST', 'observer-mysql'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'status_monitoring'),
             'username' => env('DB_USERNAME', 'root'),
@@ -65,7 +65,7 @@ return [
         'mysql-test' => [
             'driver' => 'mysql',
             'url' => env('DB_URL'),
-            'host' => env('DB_HOST', 'status-monitoring-mysql'),
+            'host' => env('DB_HOST', 'observer-mysql'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'status_monitoring_test'),
             'username' => env('DB_USERNAME', 'root'),
@@ -167,7 +167,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
         ],
 
         'default' => [

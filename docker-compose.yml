@@ -1,9 +1,9 @@
 services:
-  status-monitoring:
+  observer:
     build:
       context: .
       dockerfile: "build/dev/Dockerfile"
-    container_name: status-monitoring
+    container_name: observer
     user: "${DOCKER_USER}"
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -18,8 +18,8 @@ services:
       - ./src:/application
       - ./docs:/docs
 
-  status-monitoring-nginx:
-    container_name: "status-monitoring-nginx"
+  observer-nginx:
+    container_name: "observer-nginx"
     image: nginx:alpine
     working_dir: /application
     volumes:
@@ -28,16 +28,16 @@ services:
     ports:
       - "23331:80"
     depends_on:
-      - status-monitoring
+      - observer
 
-  status-monitoring-mysql:
+  observer-mysql:
     image: mysql:8
     command: mysqld --sql_mode=""
-    container_name: "status-monitoring-mysql"
+    container_name: "observer-mysql"
     working_dir: /application
     volumes:
       - ./src:/application:delegated
-      - status-monitoring-mysql-volume:/var/lib/mysql:delegated
+      - observer-mysql-volume:/var/lib/mysql:delegated
     environment:
       MYSQL_ROOT_PASSWORD: ""
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
@@ -45,10 +45,10 @@ services:
       - "39054:3306"
 
 volumes:
-  status-monitoring-mysql-volume:
-    name: status-monitoring-mysql-data
+  observer-mysql-volume:
+    name: observer-mysql-data
 
 networks:
   default:
-    name: "${SOCI_NETWORK:-soci-dev}_default"
+    name: "default"
     external: true

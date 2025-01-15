@@ -3,10 +3,6 @@
 /src/.phpunit.cache
 /src/var/.composer
 /src/.scribe
-/docs/openapi/status-monitoring.internal.meetsoci.com/css
-/docs/openapi/status-monitoring.internal.meetsoci.com/images
-/docs/openapi/status-monitoring.internal.meetsoci.com/js
-/docs/openapi/status-monitoring.internal.meetsoci.com/index.html
 
 .idea/
 .vscode/

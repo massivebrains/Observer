@@ -12,7 +12,4 @@ return [
     'base_url' => null,
     'type' => 'static',
     'theme' => 'default',
-    'static' => [
-        'output_path' => '../docs/openapi/status-monitoring.internal.meetsoci.com/',
-    ],
 ];

@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
         $this->addFingerprintToContext();
 
         $this->app->singleton('rabbitmq', fn () => new RabbitMQService(config('services.rabbitmq')));
-        $this->app->singleton(MonolithHttpService::class, fn () => new MonolithHttpService(config('status-monitoring.auth-token')));
+        $this->app->singleton(MonolithHttpService::class, fn () => new MonolithHttpService(config('observer.auth-token')));
     }
 
     /**
@@ -32,13 +32,11 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Add fingerprint to the context.
-     *
-     * @return void
      */
     private function addFingerprintToContext(): void
     {
         // In case there is a context information coming from dehydrated context
-        $fingerprint = Context::get('fingerprint') ?: (new FingerprintService())->get();
+        $fingerprint = Context::get('fingerprint') ?: (new FingerprintService)->get();
 
         Context::add('fingerprint', $fingerprint);
     }

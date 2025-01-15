@@ -1,11 +1,11 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "meetsoci/status-monitoring",
+    "name": "segun/observe",
     "type": "project",
     "description": "Monitoring Service",
     "keywords": [
-        "soci",
-        "status-monitoring"
+        "segun",
+        "observer"
     ],
     "license": "proprietary",
     "require": {

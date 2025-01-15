@@ -36,7 +36,7 @@ class RunPolicyCommand extends Command
 
     private function handlePolicy(Policy $policy): void
     {
-        $policyJobClass = config("status-monitoring.policies.{$policy->type->value}");
+        $policyJobClass = config("observer.policies.{$policy->type->value}");
 
         $policyRun = PolicyRun::create(['account_id' => $policy->account_id, 'policy_id' => $policy->id]);
         dispatch(new $policyJobClass($policyRun));

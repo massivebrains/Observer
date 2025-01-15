@@ -2,7 +2,7 @@
 
 This is your README file. Together with it, you can find the spec files in the `docs` folder. Remember to keep them updated, just like this file!
 
-The status-monitoring service is a laravel application.
+The observer service is a laravel application.
 
 The service is also awesome.
 
