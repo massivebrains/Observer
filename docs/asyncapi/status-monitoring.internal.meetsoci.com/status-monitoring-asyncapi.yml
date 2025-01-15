@@ -1,0 +1,70 @@
+asyncapi: "3.0.0"
+info:
+  title: Status Monitoring
+  version: "1.0"
+  description: |
+    Status Monitoring Service
+
+servers:
+  productionRabbitMQ:
+    host: b-3180e752-ce66-4a0e-95a5-0b4f5065abe4.mq.us-east-1.amazonaws.com
+    protocol: amqp
+    description: default rabbitmq instance
+  localRabbitMQ:
+    host: localhost
+    protocol: amqp
+    description: local rabbitmq instance (shared with Monolith)
+
+defaultContentType: application/json
+
+channels:
+  Notifications:
+    address: notifications.*
+    description: Notifications related to Status Monitoring Policies.
+    messages:
+      NotificationMessage:
+        contentType: application/json
+        payload:
+          $ref: "#/components/schemas/NotificationMessage"
+    bindings:
+      amqp:
+        is: routingKey
+        exchange:
+          name: STATUS_MONITORING_SERVICE_EXCHANGE
+          type: topic
+          durable: true
+          autodelete: false
+
+components:
+  schemas:
+    Incident:
+      type: object
+      properties:
+        opened_at:
+          type: string
+          format: date-time
+          example: "2024-12-11T17:44:44.0000002"
+        closed_at:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          type: string
+          example: "OPEN"
+        severity:
+          type: string
+          example: "MAJOR_OUTAGE"
+    NotificationMessage:
+      type: object
+      properties:
+        account_id:
+          type: integer
+          example: 1
+        policy:
+          type: string
+          example: "PAGES_HEALTH_GENERAL"
+        product:
+          type: string
+          example: "LOCAL_LANDING_PAGES"
+        incident:
+          $ref: "#/components/schemas/Incident"

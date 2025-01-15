@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+
+<ruleset  name="PHP_CodeSniffer">
+	<description>PHPCS configuration file.</description>
+	<config name="installed_paths" value="../../slevomat/coding-standard"/>
+
+	<!-- Folders to check -->
+	<file>./app</file>
+	<file>./config</file>
+	<file>./bootstrap</file>
+	<file>./database</file>
+	<file>./routes</file>
+	<file>./tests/Unit</file>
+	<file>./tests/Feature</file>
+
+	<exclude-pattern>./bootstrap/cache/*</exclude-pattern>
+
+	<!-- Our base rule: set to PSR12-->
+	<rule ref="PSR12">
+		<!-- We are excluding these sniffs from PSR12 because they conflict
+		with having the declare statement in the same line as php tag.
+		Eg: <?php declare(strict_types=1)-->
+		<exclude name="PSR12.Files.OpenTag.NotAlone" />
+		<exclude name="PSR12.Files.FileHeader.SpacingAfterBlock" />
+	</rule>
+
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+	<rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
+	<rule ref="PSR2.Namespaces.UseDeclaration"/>
+	<rule ref="Squiz.NamingConventions.ValidVariableName.NotCamelCaps"/>
+	<rule ref="Squiz.NamingConventions.ValidVariableName.StringNotCamelCaps"/>
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+
+	<rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
+	<rule ref="SlevomatCodingStandard.Functions.UnusedInheritedVariablePassedToClosure"/>
+	<rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
+	<rule ref="SlevomatCodingStandard.Namespaces.UseFromSameNamespace"/>
+	<rule ref="SlevomatCodingStandard.Namespaces.UseSpacing"/>
+	<rule ref="SlevomatCodingStandard.Variables.UnusedVariable"/>
+	<rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces"/>
+
+	<rule ref="Generic.CodeAnalysis.AssignmentInCondition">
+		<type>error</type>
+		<exclude name="Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition"/>
+	</rule>
+
+	<rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+		<exclude-pattern>./database/migrations</exclude-pattern>
+	</rule>
+
+	<rule ref="Generic.Files.LineEndings">
+		<properties>
+			<property name="eolChar" value="\n" />
+		</properties>
+	</rule>
+
+	<rule ref="Squiz.PHP.DiscouragedFunctions">
+		<properties>
+			<property name="error" value="true" />
+		</properties>
+	</rule>
+
+	<!-- Max length -->
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<property name="lineLimit" value="200" />
+			<property name="absoluteLineLimit" value="200" />
+			<property name="ignoreComments" value="true" />
+		</properties>
+		<exclude-pattern>./database</exclude-pattern>
+	</rule>
+
+	<rule ref="Generic.Metrics.CyclomaticComplexity">
+		<properties>
+			<property name="complexity" value="25" />
+			<property name="absoluteComplexity" value="25" />
+		</properties>
+	</rule>
+
+	<!-- Allow strict types to be declared in the same line as <?php tag -->
+	<rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+		<properties>
+			<property name="declareOnFirstLine" value="true" />
+			<property name="linesCountBeforeDeclare" value="0" />
+			<property name="linesCountAfterDeclare" value="1" />
+			<property name="spacesCountAroundEqualsSign" value="false" />
+		</properties>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+		<properties>
+			<property name="searchAnnotations" value="true" />
+		</properties>
+	</rule>
+</ruleset>
